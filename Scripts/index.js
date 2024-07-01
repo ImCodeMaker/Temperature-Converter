@@ -1,12 +1,22 @@
-let CheckBox = document.getElementById('Check')
-let Submit = document.getElementById('submit-btn')
-let Message = document.getElementById('message')
+let Convert = document.getElementById('convertBtn');
+let unitSelect = document.getElementById('unit');
+let resultLabel = document.getElementById('resultLabel');
 
-Submit.onclick = function(){
-    if (CheckBox.checked){
-        Message.innerText = 'Thanks! for being suscribed :)'
+Convert.addEventListener('click', function(){
+    let Unit = unitSelect.value;
+    let Temperature = parseFloat(document.getElementById('temperature').value);
+    
+    if (Unit === 'celsius') {
+        const conversionResult = (Temperature * 9/5) + 32;
+        resultLabel.innerText = `${conversionResult.toFixed(2)} F°`;
+    } else if (Unit === 'fahrenheit') { 
+        const conversionResult = (Temperature - 32) * 5/9;
+        resultLabel.innerText = `${conversionResult.toFixed(2)} C°`;
+    } else {
+        window.alert('You selected nothing');
     }
-    else {
-        Message.innerText = 'You should suscribe first!'
-    }
-}
+});
+
+unitSelect.addEventListener('change', function(){
+    resultLabel.textContent = '';
+});
